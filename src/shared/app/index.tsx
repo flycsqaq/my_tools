@@ -1,8 +1,17 @@
 import React from 'react';
-// import ProviderContainer from '@app/state';
+import AppRouter from '@app/router';
+import ProviderContainer from '@state/index';
+import AppLayout from '@components/Layout';
+import { HashRouter } from 'react-router-dom';
 
 const Root = () => {
-    return <div>123</div>;
+    return (
+        <ProviderContainer>
+            <HashRouter>
+                <AppRouter />
+            </HashRouter>
+        </ProviderContainer>
+    );
 };
 
 export default Root;

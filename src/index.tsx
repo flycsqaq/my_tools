@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import Counter from '@components/Counter';
+import Root from 'shared/app';
+import './index.sass';
 
 const render = () => {
-    ReactDom.render(<Counter />, document.getElementById('root'));
+    ReactDom.render(<Root />, document.getElementById('root'));
 };
 
 render();
