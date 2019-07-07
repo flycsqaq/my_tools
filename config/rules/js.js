@@ -14,14 +14,18 @@ exports.jsRules = [
         }
     },
     {
+        test: /\.bundle\.js$/,
+        use: 'bundle-loader'
+    },
+    {
         test: /\.ts(x?)$/,
         use: [
-            {
-                loader: 'cache-loader',
-                options: {
-                    cacheDirectory: resolve('.cache-loader')
-                }
-            },
+            // {
+            //     loader: 'cache-loader',
+            //     options: {
+            //         cacheDirectory: resolve('.cache-loader')
+            //     }
+            // },
             {
                 loader: 'ts-loader',
                 options: {

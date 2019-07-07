@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, Fragment, Dispatch, useRef } from 'react';
+import React, { useState, useEffect, Fragment, Dispatch } from 'react';
 import { Layout, Button, Icon, Input, Menu } from 'antd';
 import { Motion, spring } from 'react-motion';
 import * as styles from '@/index.sass';
@@ -34,16 +34,15 @@ const AppLayout = (props: Props) => {
     };
     // 根据loaction获取pathname
     const pathname = () => {
-        return (props.location && props.location.pathname) || router[1].pages[0].path;
+        return (props.location && props.location.pathname) || router[0].pages[0].path;
     };
-
     // 获取title
     const title = () => {
         const name = pathname();
         return (
             router.find(routeGroup => {
                 return routeGroup.pages.some(route => route.path === name);
-            }) || router[1]
+            }) || router[0]
         ).title;
     };
 
@@ -67,7 +66,7 @@ const AppLayout = (props: Props) => {
         return Array.from(new Set(open[1].slice().concat(key)));
     };
 
-    // setState是异步的,在同一周期内会对多个 setState 进行批处理。
+    // setState是异步的,在同一周期内会对多个 setState 进行批处理.
     useEffect(() => {
         openAction({
             title: addOpenTitle(title()),
@@ -79,6 +78,10 @@ const AppLayout = (props: Props) => {
         console.log(value);
     };
 
+    // console.log(props.children)
+    // useEffect(() => {
+    //     // console.log(props.children);
+    // }, [pathname()]);
     return (
         <div>
             <Motion style={{ x: spring(status ? 200 : 0) }}>
@@ -111,7 +114,7 @@ const AppLayout = (props: Props) => {
                                     selectedKeys={open[0]}
                                     mode="inline"
                                 >
-                                    {router.slice(1).map(routeGroup => (
+                                    {router.map(routeGroup => (
                                         <SubMenu
                                             key={routeGroup.title}
                                             title={
@@ -123,7 +126,10 @@ const AppLayout = (props: Props) => {
                                         >
                                             {routeGroup.pages.map(page => (
                                                 <Menu.Item key={page.path}>
-                                                    <Link to={page.path}>{page.name}</Link>
+                                                    <Link to={page.path}>
+                                                        {page.name}
+                                                        {page.isComplete ? null : ' (x)'}
+                                                    </Link>
                                                 </Menu.Item>
                                             ))}
                                         </SubMenu>

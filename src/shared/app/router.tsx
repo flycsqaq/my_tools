@@ -1,24 +1,27 @@
 import React, { Suspense } from 'react';
 import router from '@router/index';
-import { Route, Switch } from 'react-router-dom';
+import { Switch, HashRouter, Redirect } from 'react-router-dom';
 import AppLayout from '@components/Layout';
-import { ConfigProvider } from 'antd';
+import RouteTransition from '@components/RouteTransition';
 
 const AppRouter = () => {
     return (
-        <Switch>
-            <ConfigProvider>
+        <HashRouter>
+            <Switch>
                 <AppLayout>
                     <Suspense fallback={<div>loading...</div>}>
                         {router.map(routeGroup => {
-                            return routeGroup.pages.map((route, index) => (
-                                <Route key={index} exact component={route.component} path={route.path} />
+                            return routeGroup.pages.map((route, index: number) => (
+                                <Switch key={index}>
+                                    <RouteTransition exact component={route.component} path={route.path} />
+                                </Switch>
                             ));
                         })}
+                        <Redirect from={'*'} to={'/blog/eventloop'} />
                     </Suspense>
                 </AppLayout>
-            </ConfigProvider>
-        </Switch>
+            </Switch>
+        </HashRouter>
     );
 };
 

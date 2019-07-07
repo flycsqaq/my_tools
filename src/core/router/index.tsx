@@ -4,6 +4,7 @@ interface RouterType {
     path: string;
     component: LazyExoticComponent<any>;
     name: string;
+    isComplete: boolean;
 }
 
 interface Router {
@@ -13,63 +14,68 @@ interface Router {
 }
 
 const Home = lazy(() => import('../../containers/Home'));
-const Gif = lazy(() => import('../../containers/Gif'));
 const Random = lazy(() => import('../../containers/Random'));
-const Solve = lazy(() => import('../../containers/Random'));
-const Video = lazy(() => import('../../containers/Video'));
-const Watermark = lazy(() => import('../../containers/Watermark'));
-const TransformUnit = lazy(() => import('../../containers/TransformUnit'));
+const Article = lazy(() => import('../../containers/article'));
+const LazyLoad = lazy(() => import('../../containers/LazyLoad'));
 
 const router: Router[] = [
     {
-        title: 'Home',
+        title: 'BLOG',
+        icon: 'read',
         pages: [
+            // {
+            //     path: '/blog',
+            //     component: Home,
+            //     name: 'Home',
+            //     isComplete: true
+            // },
             {
-                path: '/',
-                component: Home,
-                name: 'Home'
+                path: '/blog/eventloop',
+                component: Article,
+                name: '解析Eventloop',
+                isComplete: true
             }
         ]
     },
     {
-        title: '媒体处理',
-        icon: 'picture',
-        pages: [
-            {
-                path: '/gif',
-                component: Gif,
-                name: 'Gif转化'
-            },
-            {
-                path: '/watermark',
-                component: Watermark,
-                name: '加水印'
-            },
-            {
-                path: '/video',
-                component: Video,
-                name: '视频播放'
-            }
-        ]
-    },
-    {
-        title: '工具',
+        title: 'TOOLS',
         icon: 'tool',
         pages: [
             {
                 path: '/random',
                 component: Random,
-                name: '随机事件'
+                name: '随机数生成',
+                isComplete: true
+            }
+        ]
+    },
+    {
+        title: 'DEMO',
+        icon: 'build',
+        pages: [
+            {
+                path: '/demo/lazyload',
+                component: LazyLoad,
+                name: '懒加载',
+                isComplete: true
+            }
+        ]
+    },
+    {
+        title: 'QUESTION',
+        icon: 'question',
+        pages: [
+            {
+                path: '/question/webpack',
+                component: Article,
+                name: 'webpack',
+                isComplete: true
             },
             {
-                path: '/solve',
-                component: Solve,
-                name: '解方程'
-            },
-            {
-                path: '/transformunit',
-                component: TransformUnit,
-                name: '单位转化'
+                path: '/question/react',
+                component: Article,
+                name: 'react',
+                isComplete: true
             }
         ]
     }
