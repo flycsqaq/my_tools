@@ -1,3 +1,4 @@
+```
 /**
  * 获取一个[min, max]的随机数
  * @param {number} min
@@ -93,3 +94,12 @@ export class DutyChain {
         return value;
     }
 }
+
+/**
+ * demo
+ */
+const removeDuplicates = new DutyChain({ execute: uniqueAndReplenish, next: null });
+const batch = new DutyChain({ execute: getBatchRandomNum, next: removeDuplicates });
+
+batch.delivery([], {0, 100, 10})
+```

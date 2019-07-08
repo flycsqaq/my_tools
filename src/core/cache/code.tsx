@@ -11,5 +11,6 @@ export const getScroll = (): ScrollConfig => {
 };
 
 export const saveScroll = (scroll: ScrollConfig) => {
+    // console.log(scroll);
     return window.localStorage.setItem('scroll', JSON.stringify(scroll));
 };

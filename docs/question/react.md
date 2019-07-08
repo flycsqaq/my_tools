@@ -18,3 +18,42 @@
 ### 2.2 记忆当前阅读位置
 
 &emsp;&emsp; 通过 localStorage 保存阅读文章的`window.scrollY`
+
+### 问题描述
+
+&emsp;&emsp;antd Tabs 组件多个文章组件销毁时触发多次 setState，导致数据被合并的问题。
+
+### 解决方法
+
+&emsp;&emsp;通过 ref 获取文章的 dom 节点，通过 getBoundingClientRect 计算 dom 节点的高度，绑定 scroll 事件，更新数据。
+
+## 3. useState 异步更新问题
+
+因此 useState 是基于 setState 实现的，因此也存在异步更新问题。
+
+### 3.1 setState 是如何解决的
+
+> 可以让 setState() 接收一个函数而不是一个对象。这个函数用上一个 state 作为第一个参数，将此次更新被应用时的 props 做为第二个参数。
+
+```
+this.setState((state, props) => ({
+  counter: state.counter + props.increment
+}));
+```
+
+### 3.2 useState 可以怎么做？
+
+我们可以通过闭包的方式不直接修改 state，而是修改闭包中的变量。相当于增加一个代理，用于修改 state。例如：
+
+```
+const [counter, setCounter] = useState(0);
+const addCounter = (function() {
+    let cacheCounter = counter
+    return () => {
+        cacheCounter = cacheCounter + 1;
+        setCounter(cacheCounter);
+    }
+}())
+```
+
+事实上，这种依赖于前一个数据的 state 依靠 useReducer 来实现更为妥当。

@@ -4,6 +4,7 @@ import AntdForm from '@components/Form';
 import { DutyChain, uniqueAndReplenish, Execute, getBatchRandomNum } from './plugins';
 import * as styles from '@/index.sass';
 import random from '../../../docs/article/random.md';
+import randomCode from '../../../docs/code/random.md';
 import Markdown from '@components/Markdown';
 
 interface Props {
@@ -113,7 +114,7 @@ export default AntdForm((props: Props) => {
 
     const [mode, setMode]: [boolean, Dispatch<any>] = useState(true);
     return (
-        <Tabs defaultActiveKey={'b'}>
+        <Tabs defaultActiveKey={'a'}>
             <Tabs.TabPane key={'a'} tab={'工具'}>
                 <Typography>
                     <Typography.Title level={2} style={{ textAlign: 'center' }}>
@@ -152,8 +153,11 @@ export default AntdForm((props: Props) => {
                     ))}
                 </Card>
             </Tabs.TabPane>
-            <Tabs.TabPane key={'b'} tab={'代码分析'}>
+            <Tabs.TabPane forceRender={false} key={'b'} tab={'代码分析'}>
                 <Markdown name={'random'} md={random} />
+            </Tabs.TabPane>
+            <Tabs.TabPane forceRender={false} key={'c'} tab={'代码'}>
+                <Markdown name={'randomCode'} md={randomCode} />
             </Tabs.TabPane>
         </Tabs>
     );

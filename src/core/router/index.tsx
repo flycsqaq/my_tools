@@ -23,12 +23,6 @@ const router: Router[] = [
         title: 'BLOG',
         icon: 'read',
         pages: [
-            // {
-            //     path: '/blog',
-            //     component: Home,
-            //     name: 'Home',
-            //     isComplete: true
-            // },
             {
                 path: '/blog/eventloop',
                 component: Article,
@@ -42,19 +36,13 @@ const router: Router[] = [
         icon: 'tool',
         pages: [
             {
-                path: '/random',
+                path: '/tools/random',
                 component: Random,
                 name: '随机数生成',
                 isComplete: true
-            }
-        ]
-    },
-    {
-        title: 'DEMO',
-        icon: 'build',
-        pages: [
+            },
             {
-                path: '/demo/lazyload',
+                path: '/tools/lazyload',
                 component: LazyLoad,
                 name: '懒加载',
                 isComplete: true

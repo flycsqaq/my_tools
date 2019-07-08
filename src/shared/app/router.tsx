@@ -10,14 +10,14 @@ const AppRouter = () => {
             <Switch>
                 <AppLayout>
                     <Suspense fallback={<div>loading...</div>}>
-                        {router.map(routeGroup => {
-                            return routeGroup.pages.map((route, index: number) => (
-                                <Switch key={index}>
-                                    <RouteTransition exact component={route.component} path={route.path} />
-                                </Switch>
-                            ));
-                        })}
-                        <Redirect from={'*'} to={'/blog/eventloop'} />
+                        <Switch>
+                            {router.map(routeGroup => {
+                                return routeGroup.pages.map((route, index: number) => (
+                                    <RouteTransition key={index} exact component={route.component} path={route.path} />
+                                ));
+                            })}
+                            <Redirect from={'**'} to={'/blog/eventloop'} />
+                        </Switch>
                     </Suspense>
                 </AppLayout>
             </Switch>

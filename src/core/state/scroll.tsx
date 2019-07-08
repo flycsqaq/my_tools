@@ -8,6 +8,7 @@ export interface ScrollConfig {
 
 const scrollConfigContainer = () => {
     const [scrollConfig, changeScrollConfig]: [ScrollConfig, Dispatch<ScrollConfig>] = useState(getScroll());
+
     const changeScroll = (type: string, number: number) => {
         const scroll = { ...scrollConfig };
         scroll[type] = number;

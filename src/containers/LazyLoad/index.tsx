@@ -4,6 +4,7 @@ import { loadImage } from './proxy';
 import { Tabs } from 'antd';
 import Markdown from '@components/Markdown';
 import lazyLoad from '../../../docs/article/lazyLoad.md';
+import lazyLoadCode from '../../../docs/code/lazyLoad.md';
 
 export default () => {
     const getImages = () => {
@@ -43,7 +44,7 @@ export default () => {
         };
     }, [servername]);
     const handleChange = (x: string) => {
-        if (x === 'code') return;
+        if (x === 'code' || x === 'codeShow') return;
         setServername(x);
     };
     return (
@@ -59,6 +60,9 @@ export default () => {
             </Tabs.TabPane>
             <Tabs.TabPane key={'code'} tab={'代码分析'}>
                 <Markdown name={'lazyLoad'} md={lazyLoad} />
+            </Tabs.TabPane>
+            <Tabs.TabPane key={'codeShow'} tab={'代码'}>
+                <Markdown name={'randomCode'} md={lazyLoadCode} />
             </Tabs.TabPane>
         </Tabs>
     );
