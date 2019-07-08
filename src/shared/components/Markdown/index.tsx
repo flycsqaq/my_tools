@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import hljs from 'highlight.js';
 import { ScrollConfigContainer } from '@state/scroll';
-import { useState } from '../../../../../../node_modules/@types/react';
+import * as styles from './scroll.sass';
 
 interface Props {
     md: string;
@@ -14,7 +14,6 @@ const Markdown = (props: Props) => {
     const saveScrollConfig = () => {
         changeScroll(props.name, articleRef.current.scrollTop);
     };
-    // const [style, setStyle] = useState({})
     useEffect(() => {
         Array.from(document.querySelectorAll('pre code')).forEach(element => {
             hljs.highlightBlock(element);
@@ -28,9 +27,9 @@ const Markdown = (props: Props) => {
     return (
         <div
             ref={articleRef}
-            style={{ overflow: 'scroll' }}
+            style={{ overflowY: 'scroll' }}
             onScroll={() => saveScrollConfig()}
-            className={'markdown-body'}
+            className={'markdown-body ' + styles.fyScroll}
             dangerouslySetInnerHTML={{ __html: props.md }}
         />
     );
