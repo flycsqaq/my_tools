@@ -17,6 +17,9 @@ const Home = lazy(() => import('../../containers/Home'));
 const Random = lazy(() => import('../../containers/Random'));
 const Article = lazy(() => import('../../containers/article'));
 const LazyLoad = lazy(() => import('../../containers/LazyLoad'));
+const Antd = lazy(() => import('../../containers/Antd'));
+// const DragTable = lazy(() => import('../../containers/Antd/DragTable'));
+const Other = lazy(() => import('../../containers/other'));
 
 const router: Router[] = [
     {
@@ -31,6 +34,18 @@ const router: Router[] = [
             }
         ]
     },
+    // {
+    //     title: 'Antd二次封装',
+    //     icon: 'tool',
+    //     pages: [
+    //         {
+    //             path: '/antd/dragtable',
+    //             component: DragTable,
+    //             name: '拖拽表格',
+    //             isComplete: false,
+    //         }
+    //     ]
+    // },
     {
         title: 'TOOLS',
         icon: 'tool',
@@ -46,6 +61,12 @@ const router: Router[] = [
                 component: LazyLoad,
                 name: '懒加载',
                 isComplete: true
+            },
+            {
+                path: '/other',
+                component: Other,
+                name: '其他',
+                isComplete: false
             }
         ]
     },
